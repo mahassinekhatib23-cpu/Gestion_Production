@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gestion Logistique - Django</title>
+  <style>
+    body { margin:0; font-family: Segoe UI, Arial, sans-serif; background:#f8fafc; color:#0f172a; }
+    .layout { display:flex; min-height:100vh; }
+    .sidebar { width:230px; background:#1e293b; color:#fff; padding:20px; }
+    .sidebar h2 { margin:0 0 20px; font-size:20px; }
+    .sidebar a { display:block; color:#cbd5e1; text-decoration:none; padding:10px; border-radius:6px; margin-bottom:8px; }
+    .sidebar a:hover { background:#334155; color:#fff; }
+    .content { flex:1; padding:24px; }
+    table { width:100%; border-collapse:collapse; background:#fff; }
+    th, td { padding:10px; border:1px solid #e2e8f0; text-align:center; }
+    th { background:#1e293b; color:#fff; }
+    .card-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+    .card { background:#fff; border:1px solid #cbd5e1; border-left:5px solid #3b82f6; border-radius:8px; padding:20px; }
+    .msg { margin:8px 0; padding:10px; background:#dcfce7; border:1px solid #86efac; border-radius:6px; }
+    form.inline { display:flex; gap:8px; flex-wrap:wrap; margin:14px 0; }
+    input, select, button { padding:8px; border:1px solid #cbd5e1; border-radius:6px; }
+    button { background:#1e293b; color:#fff; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Gestion Logistique</h2>
+      <a href="/">Accueil</a>
+      <a href="/production/">Production</a>
+      <a href="/reception/">Chargement</a>
+      <a href="/expedition/">Dechargement</a>
+      <a href="/stock/">Stocks</a>
+    </aside>
+    <main class="content">
+      {% for message in messages %}
+        <div class="msg">{{ message }}</div>
+      {% endfor %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Gestion des Stocks</h1>
+<form method="post" class="inline">{% csrf_token %}{{ form.as_p }}<button type="submit">Ajouter Mouvement</button></form>
+<h3>Etat des Stocks</h3>
+<table>
+  <tr><th>Reference</th><th>Libelle</th><th>Type</th><th>Stock actuel</th><th>Stock min</th><th>Statut</th></tr>
+  {% for a in articles %}
+  <tr>
+    <td>{{ a.reference }}</td><td>{{ a.libelle }}</td><td>{{ a.type_article }}</td><td>{{ a.stock_actuel }}</td><td>{{ a.stock_min }}</td>
+    <td>{% if a.stock_actuel <= a.stock_min %}CRITIQUE{% else %}NORMAL{% endif %}</td>
+  </tr>
+  {% endfor %}
+</table>
+<h3>Historique Mouvements</h3>
+<table>
+  <tr><th>Date</th><th>Type</th><th>Article</th><th>Qte</th></tr>
+  {% for m in movements %}
+  <tr><td>{{ m.date_mvt }}</td><td>{{ m.type_mvt }}</td><td>{{ m.article.libelle }}</td><td>{{ m.qte }}</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

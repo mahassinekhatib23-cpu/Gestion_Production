@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Gestion des Receptions</h1>
+<form method="post" class="inline">{% csrf_token %}{{ form.as_p }}<button type="submit">Ajouter Reception</button></form>
+<table>
+  <tr><th>N Bon</th><th>Date</th><th>Fournisseur</th><th>Article</th><th>Qte</th></tr>
+  {% for r in rows %}
+  <tr>
+    <td>{{ r.reception.num_bon_rec }}</td>
+    <td>{{ r.reception.date_rec }}</td>
+    <td>{{ r.reception.fournisseur.nom }}</td>
+    <td>{{ r.article.libelle }}</td>
+    <td>+ {{ r.qte }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

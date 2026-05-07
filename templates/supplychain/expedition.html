@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Gestion des Expeditions</h1>
+<form method="post" class="inline">{% csrf_token %}{{ form.as_p }}<button type="submit">Ajouter Expedition</button></form>
+<table>
+  <tr><th>N Bon</th><th>Date</th><th>Client</th><th>Article</th><th>Qte</th></tr>
+  {% for r in rows %}
+  <tr>
+    <td>{{ r.expedition.num_bon_exp }}</td>
+    <td>{{ r.expedition.date_exp }}</td>
+    <td>{{ r.expedition.client.nom }}</td>
+    <td>{{ r.article.libelle }}</td>
+    <td>- {{ r.qte }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

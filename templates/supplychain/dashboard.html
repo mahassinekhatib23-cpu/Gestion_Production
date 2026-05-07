@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Tableau de Bord</h1>
+<div class="card-row">
+  <div class="card"><h3>Articles en Stock</h3><p>{{ stocks }}</p></div>
+  <div class="card" style="border-left-color:#f59e0b"><h3>Ordres en Cours</h3><p>{{ orders }}</p></div>
+  <div class="card" style="border-left-color:#10b981"><h3>Receptions</h3><p>{{ receptions }}</p></div>
+  <div class="card" style="border-left-color:#ef4444"><h3>Expeditions</h3><p>{{ expeditions }}</p></div>
+</div>
+{% endblock %}

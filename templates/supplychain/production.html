@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Gestion de la Production</h1>
+<h3>Creer OF</h3>
+<form method="post" class="inline">{% csrf_token %}
+  <input type="hidden" name="action" value="create_of" />
+  {{ create_form.as_p }}
+  <button type="submit">Creer</button>
+</form>
+<h3>Consommer Matiere</h3>
+<form method="post" class="inline">{% csrf_token %}
+  <input type="hidden" name="action" value="consume" />
+  {{ consume_form.as_p }}
+  <button type="submit">Consommer</button>
+</form>
+<h3>Ordres de Fabrication</h3>
+<table>
+  <tr><th>N OF</th><th>Produit</th><th>Qte</th><th>Date</th><th>Statut</th><th>Action</th></tr>
+  {% for of in ofs %}
+  <tr>
+    <td>{{ of.num_of }}</td><td>{{ of.article_produit.libelle }}</td><td>{{ of.qte_prevue }}</td><td>{{ of.date_prevue }}</td><td>{{ of.statut }}</td>
+    <td>
+      <form method="post" class="inline">{% csrf_token %}
+        <input type="hidden" name="action" value="status" />
+        <input type="hidden" name="of_id" value="{{ of.id }}" />
+        <select name="statut">
+          <option>En attente</option><option>En cours</option><option>Terminé</option><option>Annulé</option>
+        </select>
+        <button type="submit">MAJ</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
